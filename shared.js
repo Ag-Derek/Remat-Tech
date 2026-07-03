@@ -197,21 +197,35 @@ if (cbfiTrack) {
 const valuesTrack = document.querySelector('.values-track');
 if (valuesTrack) {
   const valueCards = valuesTrack.querySelectorAll('.value-card');
-  const valueDots = document.querySelectorAll('.values-nav button');
+  const valuesNav = document.querySelector('.values-nav');
+  const gap = 32;
   let valIdx = 0;
-  function moveValues() {
+
+  function getVisible(){
+    return window.innerWidth > 1024 ? 3 : window.innerWidth > 640 ? 2 : 1;
+  }
+
+  function buildDots(maxIdx){
+    valuesNav.innerHTML = '';
+    for (let i = 0; i <= maxIdx; i++){
+      const b = document.createElement('button');
+      if (i === valIdx) b.classList.add('active');
+      b.addEventListener('click', () => { valIdx = i; moveValues(); });
+      valuesNav.appendChild(b);
+    }
+  }
+
+  function moveValues(rebuildDots){
     const card = valueCards[0];
-    const gap = 24;
     const cardW = card.offsetWidth + gap;
-    const visible = window.innerWidth > 1024 ? 3 : window.innerWidth > 640 ? 2 : 1;
+    const visible = getVisible();
     const maxIdx = Math.max(0, valueCards.length - visible);
     valIdx = Math.min(valIdx, maxIdx);
     valuesTrack.style.transform = `translateX(-${valIdx * cardW}px)`;
-    valueDots.forEach((d,i) => d.classList.toggle('active', i === valIdx));
+    if (rebuildDots) buildDots(maxIdx);
+    valuesNav.querySelectorAll('button').forEach((d,i) => d.classList.toggle('active', i === valIdx));
   }
-  valueDots.forEach((dot, i) => {
-    dot.addEventListener('click', () => { valIdx = i; moveValues(); });
-  });
-  window.addEventListener('resize', moveValues);
-  moveValues();
+
+  window.addEventListener('resize', () => moveValues(true));
+  moveValues(true);
 }

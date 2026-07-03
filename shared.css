@@ -1714,11 +1714,11 @@
 .values-head h2{font-size:clamp(32px,5vw,50px);}
 .values-head h2 em{color:var(--teal); font-style:normal;}
 
-.values-track-wrap{position:relative; overflow:hidden; max-width:948px; margin:0 auto;}
-.values-track{display:flex; gap:24px; transition:transform .4s ease;}
+.values-track-wrap{position:relative; overflow:hidden; max-width:var(--max); margin:0 auto;}
+.values-track{display:flex; gap:32px; transition:transform .4s ease;}
 .value-card{
   background:#fff; border:1px solid var(--line); border-radius:22px; padding:36px;
-  min-width:300px; flex:0 0 300px;
+  flex:0 0 calc((100% - 64px)/3);
 }
 .value-card .icon{
   width:44px; height:44px; border-radius:12px; background:#eaf0ff;
@@ -1735,10 +1735,10 @@
 .values-nav button.active{background:var(--blue); width:26px; border-radius:6px;}
 
 @media (max-width:1024px){
-  .values-track-wrap{max-width:624px;}
+  .value-card{flex:0 0 calc((100% - 32px)/2);}
 }
 @media (max-width:640px){
-  .values-track-wrap{max-width:300px;}
+  .value-card{flex:0 0 100%;}
 }
 
 /* journey */
