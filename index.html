@@ -127,37 +127,11 @@
 <!-- ================= HERO ================= -->
 <section class="hero" id="top">
 
-  <!-- decorative pipes -->
-  <svg class="hero-pipes" viewBox="0 0 600 500" fill="none">
-    <defs>
-      <linearGradient id="pipeGrad" x1="0" y1="0" x2="600" y2="500" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#2f6df6"/>
-        <stop offset="0.5" stop-color="#7aa3ff"/>
-        <stop offset="1" stop-color="#28d6ad"/>
-      </linearGradient>
-    </defs>
-    <g stroke="url(#pipeGrad)" stroke-width="22" stroke-linecap="round" opacity="0.9">
-      <path d="M620 -20 L260 340" />
-      <path d="M560 60 L300 320" stroke-width="10" opacity="0.5"/>
-    </g>
-    <g fill="none" stroke="#cfe0ff" stroke-width="1.5">
-      <circle cx="470" cy="120" r="120" opacity="0.5"/>
-      <circle cx="470" cy="120" r="170" opacity="0.3"/>
-    </g>
-    <!-- soft cloud blob -->
-    <g transform="translate(420,80)">
-      <ellipse cx="0" cy="0" rx="70" ry="46" fill="#2f6df6" opacity="0.18"/>
-      <ellipse cx="40" cy="-10" rx="46" ry="32" fill="#28d6ad" opacity="0.18"/>
-      <ellipse cx="-30" cy="10" rx="40" ry="30" fill="#7aa3ff" opacity="0.22"/>
-    </g>
-  </svg>
-
-  <!-- looping animated particles -->
-  <div class="hero-orb hero-orb-1"></div>
-  <div class="hero-orb hero-orb-2"></div>
-  <div class="hero-particle hero-particle-1"></div>
-  <div class="hero-particle hero-particle-2"></div>
-  <div class="hero-particle hero-particle-3"></div>
+  <!-- full-bleed looping background video -->
+  <video class="hero-bg-video" autoplay muted loop playsinline preload="auto">
+    <source src="videos/hero-loop.mp4" type="video/mp4">
+  </video>
+  <div class="hero-video-overlay"></div>
 
   <div class="hero-inner">
     <div class="hero-icons">
@@ -170,15 +144,15 @@
       </svg>
     </div>
 
-    <h1 class="reveal">Building Africa's<br>trusted <span class="grad">trade infrastructure</span></h1>
+    <h1 class="reveal hero-h1-video">Building Africa's<br>trusted <span class="grad">trade infrastructure</span></h1>
 
-    <p class="lead reveal">A single platform for cross-border payments, automated treasury and compliant settlement — built for the businesses moving Africa's economy forward.</p>
+    <p class="lead reveal hero-lead-video">A single platform for cross-border payments, automated treasury and compliant settlement — built for the businesses moving Africa's economy forward.</p>
 
     <div class="hero-actions reveal">
       <a href="#" class="btn btn-primary">Get Started
         <svg viewBox="0 0 14 14" fill="none"><path d="M2 7H12M12 7L8 3M12 7L8 11" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
-      <a href="#" class="btn btn-outline">Request a Demo</a>
+      <a href="#" class="btn btn-outline light">Request a Demo</a>
     </div>
   </div>
 </section>
