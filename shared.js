@@ -175,22 +175,38 @@ if (featCards.length) {
 // ---------- cbfi features carousel (crossborder page) ----------
 const cbfiTrack = document.querySelector('.cbfi-feat-track');
 if (cbfiTrack) {
+  const cbfiWrap = document.querySelector('.cbfi-feat-wrap');
   const cbfiCards = cbfiTrack.querySelectorAll('.cbfi-feat-card');
-  let cbfiIndex = 0;
+  const cbfiGap = 24;
+  let cbfiScroll = 0;
+
+  function cbfiVisibleCount() {
+    const cardW = cbfiCards[0].offsetWidth + cbfiGap;
+    return Math.max(1, Math.round((cbfiWrap.offsetWidth + cbfiGap) / cardW));
+  }
+  function cbfiStep() {
+    return (cbfiCards[0].offsetWidth + cbfiGap) * cbfiVisibleCount();
+  }
+  function cbfiMaxScroll() {
+    let total = 0;
+    cbfiCards.forEach(c => total += c.offsetWidth);
+    total += cbfiGap * (cbfiCards.length - 1);
+    return Math.max(0, total - cbfiWrap.offsetWidth);
+  }
   function moveCbfi() {
-    const card = cbfiCards[0];
-    const gap = 24;
-    const cardW = card.offsetWidth + gap;
-    cbfiTrack.style.transform = `translateX(-${cbfiIndex * cardW}px)`;
+    cbfiScroll = Math.min(cbfiScroll, cbfiMaxScroll());
+    cbfiTrack.style.transform = `translateX(-${cbfiScroll}px)`;
   }
   document.getElementById('cbfiNext')?.addEventListener('click', () => {
-    cbfiIndex = Math.min(cbfiIndex + 1, cbfiCards.length - 1);
+    cbfiScroll = Math.min(cbfiScroll + cbfiStep(), cbfiMaxScroll());
     moveCbfi();
   });
   document.getElementById('cbfiPrev')?.addEventListener('click', () => {
-    cbfiIndex = Math.max(cbfiIndex - 1, 0);
+    cbfiScroll = Math.max(cbfiScroll - cbfiStep(), 0);
     moveCbfi();
   });
+  window.addEventListener('resize', moveCbfi);
+  moveCbfi();
 }
 
 // ---------- values carousel (about page) ----------
