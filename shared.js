@@ -2,6 +2,41 @@
 // SHARED SCRIPT — multigate (index + all use-case pages)
 // ============================================================
 
+// ---------- hide floating nav on scroll-down, reveal on scroll-up ----------
+// Prevents the fixed pill nav from parking on top of headline text as the
+// user scrolls through sections further down the page (e.g. the power
+// banner on index, or hero copy on inner pages).
+(function () {
+  const header = document.querySelector('header.nav');
+  if (!header) return;
+  let lastY = window.scrollY;
+  let ticking = false;
+  const REVEAL_ZONE = 80; // always show nav near the very top of the page
+
+  function onScroll() {
+    const y = window.scrollY;
+    if (y <= REVEAL_ZONE) {
+      header.classList.remove('nav-hidden');
+    } else if (y > lastY) {
+      // scrolling down
+      header.classList.add('nav-hidden');
+      document.querySelectorAll('.has-dropdown').forEach(i => i.classList.remove('open'));
+    } else if (y < lastY) {
+      // scrolling up
+      header.classList.remove('nav-hidden');
+    }
+    lastY = y;
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(onScroll);
+      ticking = true;
+    }
+  }, { passive: true });
+})();
+
 // ---------- mobile nav toggle ----------
 const navToggle = document.getElementById('navToggle');
 const navLinks  = document.getElementById('navLinks');

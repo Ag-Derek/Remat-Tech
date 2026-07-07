@@ -86,7 +86,14 @@
     border:1px solid rgba(17,25,51,.07);
     border-radius:40px;
     box-shadow:0 16px 44px -14px rgba(11,24,48,.22);
-    transition:box-shadow .25s ease, background .25s ease;
+    transition:box-shadow .25s ease, background .25s ease, transform .35s ease;
+  }
+  /* nav tucks away while scrolling down through page sections, and
+     slides back in as soon as the user scrolls up — this is what
+     keeps the floating pill from ever parking on top of headline
+     text mid-section (the overlap seen on the power banner). */
+  header.nav.nav-hidden{
+    transform:translateY(-140%);
   }
   .nav-inner{
     max-width:var(--max); margin:0 auto; padding:14px 32px;
@@ -253,8 +260,8 @@
     position:relative;
     background:radial-gradient(1200px 700px at 75% 30%, #15275a 0%, var(--navy) 55%, var(--navy-deep) 100%);
     color:#fff;
-    padding:200px 32px;
-    min-height:640px;
+    padding:160px 32px;
+    min-height:560px;
     display:flex;
     align-items:center;
     overflow:hidden;
@@ -263,26 +270,29 @@
     max-width:var(--max); margin:0 auto;
     width:100%;
     position:relative; z-index:2;
-    text-align:center;
-    display:flex; flex-direction:column; align-items:center;
+  }
+  .power-content{
+    max-width:620px;
+    text-align:left;
   }
   .power h2{
     color:#fff; font-size:clamp(30px,5vw,52px); font-weight:500;
-    max-width:760px; line-height:1.18;
+    line-height:1.18; margin-top:16px;
   }
   .power p{
-    margin:24px 0 36px; max-width:560px; color:#b9c3de; font-size:16px;
+    margin:24px 0 36px; max-width:520px; color:#b9c3de; font-size:16px; text-align:left;
   }
   .globe{
     position:absolute;
-    width:1040px; height:1040px; left:50%; bottom:-380px;
-    transform:translateX(-50%);
+    width:640px; height:640px; right:-120px; left:auto; top:50%; bottom:auto;
+    transform:translateY(-50%);
     border-radius:50%;
     overflow:hidden;
     -webkit-mask-image:radial-gradient(circle, rgba(0,0,0,.95) 0%, rgba(0,0,0,.55) 58%, transparent 78%);
             mask-image:radial-gradient(circle, rgba(0,0,0,.95) 0%, rgba(0,0,0,.55) 58%, transparent 78%);
     z-index:1;
     pointer-events:none;
+    opacity:.85;
   }
   .globe::after{
     content:'';
@@ -296,6 +306,15 @@
     filter:invert(1) brightness(1.2) contrast(1.05);
     mix-blend-mode:screen;
     opacity:.9;
+  }
+
+  @media (max-width:1024px){
+    .globe{ width:460px; height:460px; right:-160px; opacity:.55; }
+    .power-content{ max-width:100%; }
+  }
+  @media (max-width:640px){
+    .globe{ display:none; }
+    .power{ padding:120px 24px; min-height:auto; }
   }
 
   /* ---------- solutions ---------- */
