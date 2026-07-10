@@ -71,7 +71,8 @@
 }
 .ct-addr-item:first-child{ padding-top:0; }
 .ct-addr-single{ border-bottom:none; padding-bottom:8px; }
-.ct-flag{ font-size:22px; line-height:1; flex:none; margin-top:2px; }
+.ct-flag{ line-height:1; flex:none; margin-top:2px; }
+.ct-flag svg{ display:block; width:22px; height:16px; border-radius:3px; box-shadow:0 0 0 1px rgba(16,26,51,.08); }
 .ct-addr-item h3{ font-size:16px; font-weight:600; color:var(--ink); margin-bottom:4px; }
 .ct-addr-item p{ color:var(--gray); font-size:14px; line-height:1.55; }
 .ct-addr-item .ct-addr-mail{ display:block; color:var(--blue); font-size:13.5px; font-weight:500; margin-bottom:4px; }
@@ -112,10 +113,11 @@
 .ct-pin-mark{
   width:30px; height:30px; border-radius:50%;
   display:flex; align-items:center; justify-content:center;
-  font-size:14px; background:#fff; border:2px solid var(--blue);
+  background:#fff; border:2px solid var(--blue);
   box-shadow:0 8px 18px -6px rgba(47,109,246,.5);
-  position:relative;
+  position:relative; overflow:hidden;
 }
+.ct-pin-mark svg{ display:block; width:18px; height:13.5px; border-radius:2px; }
 .ct-pin-mark::after{
   content:''; position:absolute; inset:-6px; border-radius:50%;
   border:1.5px solid rgba(47,109,246,.35);
@@ -256,6 +258,49 @@
 </head>
 <body>
 
+<!-- Flag sprite: real vector flags, used instead of emoji flag glyphs.
+     (Emoji flags like 🇬🇭 render fine in Firefox on Windows because Firefox
+     ships its own color-emoji font, but Chrome/Edge on Windows fall back to
+     Segoe UI Emoji, which has no flag glyphs — it just prints the two
+     letters. SVG flags render identically in every browser.) -->
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+  <defs>
+    <symbol id="flag-gh" viewBox="0 0 640 480">
+      <path fill="#006b3f" d="M0 0h640v480H0z"/>
+      <path fill="#fcd116" d="M0 0h640v320H0z"/>
+      <path fill="#ce1126" d="M0 0h640v160H0z"/>
+      <path fill="#000001" d="m320 160 52 160-136.1-98.9H404L268 320z"/>
+    </symbol>
+    <symbol id="flag-za" viewBox="0 0 640 480">
+      <path fill="#fff" d="M0 0h640v480H0z"/>
+      <g clip-path="url(#za-a)" transform="translate(67.4)scale(.93748)">
+        <g fill-rule="evenodd" stroke-width="1pt">
+          <path fill="#000001" d="M-71.9 407.8V104.4L154 256.1z"/>
+          <path fill="#000c8a" d="m82.2 512.1 253.6-170.6H696V512H82.2z"/>
+          <path fill="#e1392d" d="M66 0h630v170.8H335.7S69.3-1.7 66 0"/>
+          <path fill="#ffb915" d="M-71.9 64v40.4L154 256-72 407.8v40.3l284.5-192z"/>
+          <path fill="#007847" d="M-71.9 64V0h95l301.2 204h371.8v104.2H324.3L23 512h-94.9v-63.9l284.4-192L-71.8 64z"/>
+          <path fill="#fff" d="M23 0h59.2l253.6 170.7H696V204H324.3zm0 512.1h59.2l253.6-170.6H696v-33.2H324.3L23 512z"/>
+        </g>
+      </g>
+      <clipPath id="za-a"><path fill-opacity=".7" d="M-71.9 0h682.7v512H-71.9z"/></clipPath>
+    </symbol>
+    <symbol id="flag-zw" viewBox="0 0 640 480">
+      <g clip-path="url(#zw-a)" transform="matrix(1.1722 0 0 1.1426 -2.3 -.1)">
+        <path fill="#006400" d="M0 0h840v420H0z"/>
+        <path fill="#ffd200" d="M0 60h840v300H0z"/>
+        <path fill="#d40000" d="M0 120h840v180H0z"/>
+        <path fill="#000001" d="M0 180h840v60H0z"/>
+        <path stroke="#000" stroke-width="20" d="M0 0v420l280-210z"/>
+        <path fill="#fff" d="M0 0v420l280-210z"/>
+        <path fill="#d40000" d="M106.5 104.4 162 275.1 16.8 169.6h179.5L51 275.1z"/>
+        <path fill="#fc0" d="M124.8 217.8c-3 0-5.1 2.1-5.1 5.2 0 4.8 5.4 7.2 8.6 3.8s1-9-3.5-9z"/>
+      </g>
+      <clipPath id="zw-a"><rect width="546" height="420.1" x="1.9" y=".1" ry="0"/></clipPath>
+    </symbol>
+  </defs>
+</svg>
+
 <!-- ===== HEADER ===== -->
 <header class="nav">
   <div class="nav-inner">
@@ -342,7 +387,7 @@
       <div class="ct-addr-label">Office Locations</div>
       <div class="ct-addr-list">
         <div class="ct-addr-item">
-          <span class="ct-flag">🇬🇭</span>
+          <span class="ct-flag"><svg viewBox="0 0 640 480"><use href="#flag-gh"/></svg></span>
           <div>
             <h3>Accra Office</h3>
             <a href="mailto:info@rematholdings.com" class="ct-addr-mail">info@rematholdings.com</a>
@@ -350,7 +395,7 @@
           </div>
         </div>
         <div class="ct-addr-item">
-          <span class="ct-flag">🇿🇦</span>
+          <span class="ct-flag"><svg viewBox="0 0 640 480"><use href="#flag-za"/></svg></span>
           <div>
             <h3>Johannesburg Office</h3>
             <a href="mailto:info@rematholdings.com" class="ct-addr-mail">info@rematholdings.com</a>
@@ -358,7 +403,7 @@
           </div>
         </div>
         <div class="ct-addr-item">
-          <span class="ct-flag">🇿🇦</span>
+          <span class="ct-flag"><svg viewBox="0 0 640 480"><use href="#flag-za"/></svg></span>
           <div>
             <h3>Cape Town Office</h3>
             <a href="mailto:info@rematholdings.com" class="ct-addr-mail">info@rematholdings.com</a>
@@ -366,7 +411,7 @@
           </div>
         </div>
         <div class="ct-addr-item">
-          <span class="ct-flag">🇿🇼</span>
+          <span class="ct-flag"><svg viewBox="0 0 640 480"><use href="#flag-zw"/></svg></span>
           <div>
             <h3>Harare Office</h3>
             <a href="mailto:info@rematholdings.com" class="ct-addr-mail">info@rematholdings.com</a>
@@ -380,19 +425,19 @@
     <div class="ct-map-wrap ct-reveal">
         <svg viewBox="0 0 212 265" xmlns="http://www.w3.org/2000/svg" class="ct-map-dots" aria-hidden="true"><circle cx="45" cy="2"/><circle cx="55" cy="2"/><circle cx="115" cy="2"/><circle cx="125" cy="2"/><circle cx="135" cy="2"/><circle cx="145" cy="2"/><circle cx="155" cy="2"/><circle cx="165" cy="2"/><circle cx="175" cy="2"/><circle cx="185" cy="2"/><circle cx="195" cy="2"/><circle cx="205" cy="2"/><circle cx="55" cy="12"/><circle cx="75" cy="12"/><circle cx="85" cy="12"/><circle cx="95" cy="12"/><circle cx="105" cy="12"/><circle cx="115" cy="12"/><circle cx="125" cy="12"/><circle cx="135" cy="12"/><circle cx="145" cy="12"/><circle cx="155" cy="12"/><circle cx="165" cy="12"/><circle cx="175" cy="12"/><circle cx="185" cy="12"/><circle cx="195" cy="12"/><circle cx="205" cy="12"/><circle cx="65" cy="22"/><circle cx="75" cy="22"/><circle cx="85" cy="22"/><circle cx="95" cy="22"/><circle cx="105" cy="22"/><circle cx="115" cy="22"/><circle cx="125" cy="22"/><circle cx="135" cy="22"/><circle cx="145" cy="22"/><circle cx="155" cy="22"/><circle cx="165" cy="22"/><circle cx="175" cy="22"/><circle cx="185" cy="22"/><circle cx="195" cy="22"/><circle cx="205" cy="22"/><circle cx="65" cy="32"/><circle cx="75" cy="32"/><circle cx="95" cy="32"/><circle cx="115" cy="32"/><circle cx="125" cy="32"/><circle cx="135" cy="32"/><circle cx="175" cy="32"/><circle cx="185" cy="32"/><circle cx="205" cy="32"/><circle cx="45" cy="42"/><circle cx="55" cy="42"/><circle cx="125" cy="42"/><circle cx="145" cy="42"/><circle cx="155" cy="42"/><circle cx="165" cy="42"/><circle cx="175" cy="42"/><circle cx="185" cy="42"/><circle cx="195" cy="42"/><circle cx="45" cy="52"/><circle cx="65" cy="52"/><circle cx="75" cy="52"/><circle cx="85" cy="52"/><circle cx="145" cy="52"/><circle cx="155" cy="52"/><circle cx="165" cy="52"/><circle cx="175" cy="52"/><circle cx="185" cy="52"/><circle cx="195" cy="52"/><circle cx="205" cy="52"/><circle cx="45" cy="62"/><circle cx="55" cy="62"/><circle cx="65" cy="62"/><circle cx="75" cy="62"/><circle cx="85" cy="62"/><circle cx="95" cy="62"/><circle cx="165" cy="62"/><circle cx="175" cy="62"/><circle cx="185" cy="62"/><circle cx="195" cy="62"/><circle cx="205" cy="62"/><circle cx="35" cy="72"/><circle cx="45" cy="72"/><circle cx="55" cy="72"/><circle cx="65" cy="72"/><circle cx="75" cy="72"/><circle cx="85" cy="72"/><circle cx="95" cy="72"/><circle cx="105" cy="72"/><circle cx="115" cy="72"/><circle cx="125" cy="72"/><circle cx="135" cy="72"/><circle cx="145" cy="72"/><circle cx="155" cy="72"/><circle cx="165" cy="72"/><circle cx="175" cy="72"/><circle cx="185" cy="72"/><circle cx="195" cy="72"/><circle cx="205" cy="72"/><circle cx="25" cy="82"/><circle cx="35" cy="82"/><circle cx="45" cy="82"/><circle cx="55" cy="82"/><circle cx="65" cy="82"/><circle cx="75" cy="82"/><circle cx="85" cy="82"/><circle cx="95" cy="82"/><circle cx="105" cy="82"/><circle cx="115" cy="82"/><circle cx="125" cy="82"/><circle cx="135" cy="82"/><circle cx="145" cy="82"/><circle cx="155" cy="82"/><circle cx="165" cy="82"/><circle cx="175" cy="82"/><circle cx="185" cy="82"/><circle cx="195" cy="82"/><circle cx="205" cy="82"/><circle cx="25" cy="92"/><circle cx="35" cy="92"/><circle cx="45" cy="92"/><circle cx="55" cy="92"/><circle cx="65" cy="92"/><circle cx="75" cy="92"/><circle cx="85" cy="92"/><circle cx="95" cy="92"/><circle cx="105" cy="92"/><circle cx="115" cy="92"/><circle cx="125" cy="92"/><circle cx="135" cy="92"/><circle cx="145" cy="92"/><circle cx="155" cy="92"/><circle cx="175" cy="92"/><circle cx="185" cy="92"/><circle cx="195" cy="92"/><circle cx="205" cy="92"/><circle cx="25" cy="102"/><circle cx="35" cy="102"/><circle cx="45" cy="102"/><circle cx="55" cy="102"/><circle cx="65" cy="102"/><circle cx="75" cy="102"/><circle cx="85" cy="102"/><circle cx="95" cy="102"/><circle cx="105" cy="102"/><circle cx="115" cy="102"/><circle cx="125" cy="102"/><circle cx="135" cy="102"/><circle cx="145" cy="102"/><circle cx="155" cy="102"/><circle cx="165" cy="102"/><circle cx="185" cy="102"/><circle cx="195" cy="102"/><circle cx="205" cy="102"/><circle cx="15" cy="112"/><circle cx="25" cy="112"/><circle cx="35" cy="112"/><circle cx="45" cy="112"/><circle cx="55" cy="112"/><circle cx="65" cy="112"/><circle cx="75" cy="112"/><circle cx="85" cy="112"/><circle cx="95" cy="112"/><circle cx="105" cy="112"/><circle cx="115" cy="112"/><circle cx="125" cy="112"/><circle cx="135" cy="112"/><circle cx="145" cy="112"/><circle cx="155" cy="112"/><circle cx="165" cy="112"/><circle cx="175" cy="112"/><circle cx="185" cy="112"/><circle cx="195" cy="112"/><circle cx="25" cy="122"/><circle cx="35" cy="122"/><circle cx="45" cy="122"/><circle cx="55" cy="122"/><circle cx="65" cy="122"/><circle cx="75" cy="122"/><circle cx="85" cy="122"/><circle cx="95" cy="122"/><circle cx="105" cy="122"/><circle cx="115" cy="122"/><circle cx="125" cy="122"/><circle cx="135" cy="122"/><circle cx="145" cy="122"/><circle cx="155" cy="122"/><circle cx="165" cy="122"/><circle cx="175" cy="122"/><circle cx="195" cy="122"/><circle cx="35" cy="132"/><circle cx="45" cy="132"/><circle cx="55" cy="132"/><circle cx="65" cy="132"/><circle cx="75" cy="132"/><circle cx="85" cy="132"/><circle cx="95" cy="132"/><circle cx="105" cy="132"/><circle cx="115" cy="132"/><circle cx="125" cy="132"/><circle cx="135" cy="132"/><circle cx="145" cy="132"/><circle cx="155" cy="132"/><circle cx="165" cy="132"/><circle cx="175" cy="132"/><circle cx="185" cy="132"/><circle cx="195" cy="132"/><circle cx="95" cy="142"/><circle cx="105" cy="142"/><circle cx="115" cy="142"/><circle cx="125" cy="142"/><circle cx="135" cy="142"/><circle cx="145" cy="142"/><circle cx="155" cy="142"/><circle cx="165" cy="142"/><circle cx="175" cy="142"/><circle cx="185" cy="142"/><circle cx="95" cy="152"/><circle cx="105" cy="152"/><circle cx="115" cy="152"/><circle cx="125" cy="152"/><circle cx="135" cy="152"/><circle cx="145" cy="152"/><circle cx="155" cy="152"/><circle cx="165" cy="152"/><circle cx="175" cy="152"/><circle cx="95" cy="162"/><circle cx="105" cy="162"/><circle cx="115" cy="162"/><circle cx="125" cy="162"/><circle cx="135" cy="162"/><circle cx="145" cy="162"/><circle cx="155" cy="162"/><circle cx="165" cy="162"/><circle cx="105" cy="172"/><circle cx="115" cy="172"/><circle cx="125" cy="172"/><circle cx="135" cy="172"/><circle cx="145" cy="172"/><circle cx="155" cy="172"/><circle cx="165" cy="172"/><circle cx="105" cy="182"/><circle cx="115" cy="182"/><circle cx="125" cy="182"/><circle cx="135" cy="182"/><circle cx="145" cy="182"/><circle cx="155" cy="182"/><circle cx="165" cy="182"/><circle cx="105" cy="192"/><circle cx="115" cy="192"/><circle cx="125" cy="192"/><circle cx="135" cy="192"/><circle cx="145" cy="192"/><circle cx="155" cy="192"/><circle cx="165" cy="192"/><circle cx="95" cy="202"/><circle cx="105" cy="202"/><circle cx="115" cy="202"/><circle cx="125" cy="202"/><circle cx="135" cy="202"/><circle cx="145" cy="202"/><circle cx="155" cy="202"/><circle cx="165" cy="202"/><circle cx="185" cy="202"/><circle cx="195" cy="202"/><circle cx="105" cy="212"/><circle cx="115" cy="212"/><circle cx="125" cy="212"/><circle cx="135" cy="212"/><circle cx="145" cy="212"/><circle cx="155" cy="212"/><circle cx="185" cy="212"/><circle cx="195" cy="212"/><circle cx="105" cy="222"/><circle cx="115" cy="222"/><circle cx="125" cy="222"/><circle cx="135" cy="222"/><circle cx="145" cy="222"/><circle cx="155" cy="222"/><circle cx="185" cy="222"/><circle cx="115" cy="232"/><circle cx="125" cy="232"/><circle cx="135" cy="232"/><circle cx="145" cy="232"/><circle cx="115" cy="242"/><circle cx="125" cy="242"/><circle cx="135" cy="242"/></svg>
         <div class="ct-pin ct-pin-accra">
-          <div class="ct-pin-mark">🇬🇭</div>
+          <div class="ct-pin-mark"><svg viewBox="0 0 640 480"><use href="#flag-gh"/></svg></div>
           <div class="ct-pin-label">Accra, Ghana</div>
         </div>
         <div class="ct-pin ct-pin-johannesburg">
-          <div class="ct-pin-mark">🇿🇦</div>
+          <div class="ct-pin-mark"><svg viewBox="0 0 640 480"><use href="#flag-za"/></svg></div>
           <div class="ct-pin-label">Johannesburg, South Africa</div>
         </div>
         <div class="ct-pin ct-pin-capetown">
-          <div class="ct-pin-mark">🇿🇦</div>
+          <div class="ct-pin-mark"><svg viewBox="0 0 640 480"><use href="#flag-za"/></svg></div>
           <div class="ct-pin-label">Cape Town, South Africa</div>
         </div>
         <div class="ct-pin ct-pin-harare">
-          <div class="ct-pin-mark">🇿🇼</div>
+          <div class="ct-pin-mark"><svg viewBox="0 0 640 480"><use href="#flag-zw"/></svg></div>
           <div class="ct-pin-label">Harare, Zimbabwe</div>
         </div>
     </div>
@@ -450,7 +495,7 @@
             <div class="ct-input-row">
               <div class="ct-code-wrap">
                 <select class="ct-code-select" aria-label="Country code">
-                  <option value="+233" selected>🇬🇭 Ghana +233</option>
+                  <option value="+233" selected>GH +233 Ghana</option>
                   <option value="+234">🇳🇬 Nigeria +234</option>
                   <option value="+44">🇬🇧 United Kingdom +44</option>
                   <option value="+1">🇨🇦 Canada +1</option>
