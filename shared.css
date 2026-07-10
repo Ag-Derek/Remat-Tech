@@ -336,6 +336,7 @@
   }
   .solution-card-wrap:nth-child(1){ top:92px; z-index:1; }
   .solution-card-wrap:nth-child(2){ top:120px; z-index:2; }
+  .solution-card-wrap:nth-child(3){ top:148px; z-index:3; }
 
   .solution-card{
     display:grid; grid-template-columns:1fr 1fr;
@@ -367,6 +368,7 @@
     .sc-text{padding:40px 32px;}
     .solution-card-wrap:nth-child(1){ top:80px; }
     .solution-card-wrap:nth-child(2){ top:100px; }
+    .solution-card-wrap:nth-child(3){ top:120px; }
   }
 
   /* ---------- borderless ---------- */
