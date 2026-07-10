@@ -81,12 +81,28 @@
   header.nav{
     position:fixed; top:20px; left:20px; right:20px; z-index:100;
     max-width:1400px; margin:0 auto;
-    background:rgba(255,255,255,.85);
-    backdrop-filter:blur(16px);
     border:1px solid rgba(17,25,51,.07);
     border-radius:40px;
     box-shadow:0 16px 44px -14px rgba(11,24,48,.22);
-    transition:box-shadow .25s ease, background .25s ease, transform .35s ease;
+    transition:box-shadow .25s ease, transform .35s ease;
+    isolation:isolate; /* own stacking context, without needing filter/transform */
+  }
+  /* The frosted-glass background lives on a pseudo-element rather than on
+     header.nav itself. backdrop-filter (like transform) creates a new
+     "containing block" for any position:fixed descendant — and #navLinks
+     (the full-screen mobile menu) is position:fixed *inside* header.nav.
+     If header.nav carried backdrop-filter directly, the mobile menu would
+     position itself against the small floating pill instead of the
+     viewport, rendering narrower than the screen and clipped at the
+     bottom. Keeping the filter off header.nav avoids that entirely. */
+  header.nav::before{
+    content:'';
+    position:absolute; inset:0;
+    background:rgba(255,255,255,.85);
+    backdrop-filter:blur(16px);
+    border-radius:inherit;
+    z-index:-1;
+    pointer-events:none;
   }
   /* nav tucks away while scrolling down through page sections, and
      slides back in as soon as the user scrolls up — this is what
