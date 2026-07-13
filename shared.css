@@ -409,7 +409,7 @@
     position:relative; z-index:2;
   }
   .borderless h2{
-    color:#fff; font-size:clamp(38px,7vw,72px); line-height:1.08; font-weight:500;
+    color:#fff; font-size:clamp(38px,7vw,64px); line-height:1.08; font-weight:500;
   }
   .borderless h2 .teal{color:var(--teal);}
   .borderless-copy p{color:#aab4d1; font-size:16px; max-width:380px; margin-bottom:28px;}
@@ -627,7 +627,7 @@
   }
   .faq-head{margin-bottom:60px;}
   .faq-head h2{
-    font-size:clamp(34px,5vw,54px); position:relative; display:inline-block;
+    font-size:clamp(34px,5vw,52px); position:relative; display:inline-block;
   }
   .faq-head h2 .underline-wrap{position:relative;}
   .faq-head h2 .underline-wrap::after{
