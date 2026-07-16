@@ -1016,15 +1016,15 @@
 .uc-link.active{background:var(--blue); color:#fff;}
 .uc-link:not(.active):hover{color:var(--ink);}
 
-/* ---------- use-case sticky pill bar (single instance) ---------- */
+/* ---------- use-case pill bar (single instance) ---------- */
 .uc-pill-bar{
-  margin-top:112px;   /* clears the floating header at initial paint */
-  position:sticky;
-  top:98px;           /* floats just below the header pill once scrolled */
+  position:fixed;
+  left:0; right:0;
+  bottom:22px;        /* floats above the page content, doesn't compete with the header */
   z-index:90;
   display:flex;
   justify-content:center;
-  padding:0 16px 22px;
+  padding:0 16px;
   background:transparent;
   pointer-events:none;   /* only the pill itself should catch clicks */
 }
@@ -1036,7 +1036,7 @@
 @media (max-width:640px){
   .uc-pill{padding:6px;}
   .uc-link{padding:7px 13px; font-size:12.5px;}
-  .uc-pill-bar{ margin-top:88px; top:74px; }
+  .uc-pill-bar{ bottom:14px; }
 }
 
 /* ---------- use case hero ---------- */
@@ -1754,6 +1754,7 @@
 .openings-head{text-align:center; margin-bottom:60px;}
 .openings-head h2{font-size:clamp(34px,5.4vw,52px);}
 .openings-head p{color:var(--gray); font-size:15.5px; max-width:480px; margin:18px auto 0;}
+.openings-empty{font-family:'Plus Jakarta Sans', sans-serif; font-weight:600; font-size:clamp(34px,5.4vw,52px); color:var(--ink); text-align:center; margin:36px auto 0; max-width:480px;}
 
 .job-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
 .job-card{
@@ -2039,6 +2040,10 @@
 .ldr-founder-grid{
   position:relative; z-index:2; max-width:var(--max); margin:0 auto; padding:0 32px;
   display:grid; grid-template-columns:1fr 1fr; gap:32px;
+  justify-content:center;
+}
+.ldr-founder-grid:has(.ldr-founder-card:only-child){
+  grid-template-columns:minmax(280px,440px);
 }
 .ldr-founder-card{
   background:#fff; border-radius:24px; overflow:hidden;
