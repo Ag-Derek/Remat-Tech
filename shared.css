@@ -1752,9 +1752,19 @@
 
 .openings{padding:110px 32px; max-width:var(--max); margin:0 auto;}
 .openings-head{text-align:center; margin-bottom:60px;}
-.openings-head h2{font-size:clamp(34px,5.4vw,52px);}
+.openings-head h2{font-size:clamp(34px,5.4vw,42px);}
 .openings-head p{color:var(--gray); font-size:15.5px; max-width:480px; margin:18px auto 0;}
-.openings-empty{font-family:'Plus Jakarta Sans', sans-serif; font-weight:600; font-size:clamp(34px,5.4vw,52px); color:var(--ink); text-align:center; margin:36px auto 0; max-width:480px;}
+.openings-empty{
+    font-family:'Plus Jakarta Sans', sans-serif;
+    font-weight:700;
+    font-size:clamp(32px,4.5vw,46px);
+    line-height:1.2;
+    letter-spacing:-0.02em;
+    color: var(--blue);
+    text-align:center;
+    margin:36px auto 0;
+    max-width:560px;
+}
 
 .job-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
 .job-card{
