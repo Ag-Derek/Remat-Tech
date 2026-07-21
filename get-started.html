@@ -268,19 +268,37 @@
     let lastFocused = null;
 
     // maps each challenge checkbox (by order) to the solution it recommends
-    const SOLUTIONS = [
+   const SOLUTIONS = [
     {
-        title: "Treasury", desc: "Unified visibility and control of cash positions across all your bank accounts."},
+        title: "Secure",
+        link: "secure.html",
+        linkText: "Secure Enterprise Communication Platform",
+        desc: "Secure communication, centralized records, and controlled stakeholder collaboration."
+    },
     {
-        title: "Lending", desc: "Automate lending workflows and improve credit decision-making."},
+        title: "Treasury",
+        link: "treasury.html",
+        linkText: "Treasury and ALM Platform",
+        desc: "Real-time visibility, liquidity management, and better control over financial positions."
+    },
     {
-        title: "Compliance", desc: "Streamline compliance, audit, and regulatory reporting."}
+        title: "Loan",
+        link: "Loans.html",
+        linkText: "Loan Origination and Credit Risk Solutions",
+        desc: "Improve loan origination, credit decisioning, and portfolio management."
+    }
 ];
 
 const CHECKBOX_TO_SOLUTION = [
-    0, 0, 0,   // Checkboxes 1-3 → Treasury
-    1, 1, 1,   // Checkboxes 4-6 → Lending
-    2, 2, 2    // Checkboxes 7-9 → Compliance
+    0, // Checkbox 1 → Secure
+    1, // Checkbox 2 → Treasury
+    2, // Checkbox 3 → Loan
+    2, // Checkbox 4 → Loan
+    1, // Checkbox 5 → Treasury
+    0, // Checkbox 6 → Secure
+    0, // Checkbox 7 → Secure
+    2, // Checkbox 8 → Loan
+    1  // Checkbox 9 → Treasury
 ];
 
     function checkIconSvg(){
@@ -309,7 +327,10 @@ const CHECKBOX_TO_SOLUTION = [
         <div class="gsr-card">
           <div class="gsr-card-top">
             <span class="gsr-check">${checkIconSvg()}</span>
-            <h3>${sol.title}</h3>
+            <h3><a href="${sol.link}">
+                    ${sol.linkText}
+                </a>
+            </h3>
           </div>
           <p>${sol.desc}</p>
         </div>
