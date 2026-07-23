@@ -1579,7 +1579,7 @@
 /* ---------- innovate banner ---------- */
 .innovate{
   position:relative; overflow:hidden;
-  background:linear-gradient(120deg, var(--navy-deep) 0%, var(--navy) 55%, #122a66 100%);
+  background:linear-gradient(135deg, #050e2e 0%, #0a2472 35%, #0e56c9 70%, #0aa2f0 100%);
   padding:120px 32px; color:#fff;
 }
 .innovate-orb{
@@ -1697,7 +1697,7 @@
 
 .innovate{
   position:relative; overflow:hidden;
-  background:linear-gradient(120deg, var(--navy-deep) 0%, var(--navy) 55%, #122a66 100%);
+  background:linear-gradient(135deg, #050e2e 0%, #0a2472 35%, #0e56c9 70%, #0aa2f0 100%);
   padding:120px 32px; color:#fff;
 }
 .innovate-orb{
