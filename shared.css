@@ -2693,3 +2693,22 @@
 
     transform:translateY(-3px);
 }
+/* ================= MEDIA SKELETON (auto-applied to img/video via shared.js) ================= */
+/* Applied directly to the img/video element itself — no wrapper element,
+   no size/position changes — so it can never disturb existing layout. */
+img.media-skel,
+video.media-skel{
+  background-color:var(--line);
+  background-image:linear-gradient(
+    90deg,
+    var(--line) 0%,
+    #eef1f7 50%,
+    var(--line) 100%
+  );
+  background-size:200% 100%;
+  animation:media-skel-sheen 1.5s ease-in-out infinite;
+}
+@keyframes media-skel-sheen{
+  0%{ background-position:200% 0; }
+  100%{ background-position:-200% 0; }
+}

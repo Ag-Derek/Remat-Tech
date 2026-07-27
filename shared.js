@@ -326,3 +326,34 @@ if (valuesTrack) {
     closeDrawer();
   });
 })();
+
+// ---------- skeleton-loading shimmer for all img/video across every page ----------
+// Adds a .media-skel class (background shimmer only) directly on each element
+// and removes it once loaded. No wrapper elements, no size/style overrides —
+// existing layout, object-fit, and border-radius are left completely alone.
+(function () {
+  function watch(el) {
+    if (el.classList.contains('no-skel')) return;
+
+    el.classList.add('media-skel');
+    const clear = () => el.classList.remove('media-skel');
+
+    if (el.tagName === 'IMG') {
+      if (el.complete && el.naturalWidth) {
+        clear();
+      } else {
+        el.addEventListener('load', clear, { once: true });
+        el.addEventListener('error', clear, { once: true });
+      }
+    } else if (el.tagName === 'VIDEO') {
+      if (el.readyState >= 2) {
+        clear();
+      } else {
+        el.addEventListener('loadeddata', clear, { once: true });
+        el.addEventListener('error', clear, { once: true });
+      }
+    }
+  }
+
+  document.querySelectorAll('img, video').forEach(watch);
+})();
