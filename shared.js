@@ -322,8 +322,66 @@ if (valuesTrack) {
 
   form?.addEventListener('submit', e => {
     e.preventDefault();
-    // placeholder submit handling — wire up to real endpoint later
-    closeDrawer();
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    // Web3Forms — routes to rematsd04@gmail.com (same account as the contact page)
+    const WEB3FORMS_ACCESS_KEY = '611b8464-d8d4-4643-85bb-7ccd4c9a83e8';
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    let statusEl = form.querySelector('.rdm-status');
+    if (!statusEl) {
+      statusEl = document.createElement('p');
+      statusEl.className = 'rdm-status';
+      statusEl.style.cssText = 'text-align:center; font-size:12.5px; margin-top:14px; min-height:16px;';
+      form.appendChild(statusEl);
+    }
+
+    const first = document.getElementById('rdmFirst')?.value.trim() || '';
+    const last  = document.getElementById('rdmLast')?.value.trim() || '';
+    const phoneCode = document.getElementById('rdmPhoneCode')?.value || '';
+    const phone     = document.getElementById('rdmPhone')?.value.trim() || '';
+
+    const payload = {
+      access_key: WEB3FORMS_ACCESS_KEY,
+      subject: 'New demo request — Remat website',
+      from_name: (first + ' ' + last).trim() || 'Website visitor',
+      email:       document.getElementById('rdmEmail')?.value.trim(),
+      first_name:  first,
+      last_name:   last,
+      institution: document.getElementById('rdmInstitution')?.value.trim(),
+      phone:       phoneCode ? ('+' + phoneCode + ' ' + phone) : phone,
+      country:     document.getElementById('rdmCountry')?.value
+    };
+
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.style.opacity = '0.6'; }
+    statusEl.style.color = '';
+    statusEl.textContent = 'Sending…';
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(payload)
+    })
+      .then(res => res.json())
+      .then(result => {
+        if (!result.success) throw new Error(result.message || 'Submission failed');
+        statusEl.style.color = '#28d6ad';
+        statusEl.textContent = "Request sent — we'll be in touch shortly!";
+        form.reset();
+        setTimeout(closeDrawer, 1400);
+      })
+      .catch(err => {
+        statusEl.style.color = '#e0483e';
+        statusEl.textContent = 'Something went wrong — please try again or email us directly.';
+        console.error('Web3Forms error (demo drawer):', err);
+      })
+      .finally(() => {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.style.opacity = ''; }
+      });
   });
 })();
 
