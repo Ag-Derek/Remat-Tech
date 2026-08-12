@@ -354,7 +354,8 @@ if (valuesTrack) {
       last_name:   last,
       institution: document.getElementById('rdmInstitution')?.value.trim(),
       phone:       phoneCode ? ('+' + phoneCode + ' ' + phone) : phone,
-      country:     document.getElementById('rdmCountry')?.value
+      country:     document.getElementById('rdmCountry')?.value,
+      message:     document.getElementById('rdmMessage')?.value.trim() || '(none provided)'
     };
 
     if (submitBtn) { submitBtn.disabled = true; submitBtn.style.opacity = '0.6'; }
