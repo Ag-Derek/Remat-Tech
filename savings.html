@@ -372,6 +372,10 @@
           <svg class="rdm-chevron" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.4"/></svg>
         </div>
       </div>
+   <div class="rdm-field">
+        <label class="rdm-label" for="rdmMessage">Message</label>
+        <textarea class="rdm-input" id="rdmMessage" rows="4" placeholder="Tell us a bit about what you're looking for"></textarea>
+      </div>
 
       <button type="submit" class="btn btn-primary rdm-cta">Submit Request <span class="gs-dot"></span></button>
     </form>
@@ -379,5 +383,88 @@
 </div>
 
 <script src="shared.js"></script>
+<script>
+// ---------- contact form → Web3Forms submission ----------
+// Setup required (one-time, free, no credit card): https://web3forms.com
+// 1. Enter enquiries@remattechnologies.io on their homepage → they email you an Access Key (no account/login needed)
+// 2. Replace the placeholder below with that key
+(function () {
+  const WEB3FORMS_ACCESS_KEY = '611b8464-d8d4-4643-85bb-7ccd4c9a83e8';
+
+  const form = document.getElementById('ctForm');
+  if (!form) return;
+
+  const submitBtn = document.getElementById('ctSubmitBtn');
+  const statusEl  = document.getElementById('ctFormStatus');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    const checkedService = form.querySelector('input[name="ct-service"]:checked');
+    const serviceText = checkedService
+      ? checkedService.closest('.ct-radio').textContent.trim().replace(/\s+/g, ' ')
+      : 'Not specified';
+
+    const payload = {
+      access_key: WEB3FORMS_ACCESS_KEY,
+      subject: 'New enquiry from Remat contact form',
+      from_name: document.getElementById('ctFullName').value.trim() || 'Website visitor',
+      service_interest: serviceText,
+      full_name:   document.getElementById('ctFullName').value.trim(),
+      institution: document.getElementById('ctInstitution').value.trim(),
+      role:        document.getElementById('ctRole').value.trim(),
+      email:       document.getElementById('ctEmail').value.trim(),
+      phone:       document.getElementById('ctPhoneCode').value + ' ' + document.getElementById('ctPhone').value.trim(),
+      message:     document.getElementById('ctMessage').value.trim() || '(none provided)'
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = '0.6';
+    statusEl.style.color = 'var(--gray)';
+    statusEl.textContent = 'Sending…';
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(payload)
+    })
+      .then(function (res) { return res.json(); })
+      .then(function (result) {
+        if (result.success) {
+          statusEl.style.color = 'var(--teal)';
+          statusEl.textContent = "Message sent — we'll be in touch shortly!";
+          form.reset();
+        } else {
+          throw new Error(result.message || 'Submission failed');
+        }
+      })
+      .catch(function (err) {
+        statusEl.style.color = '#e0483e';
+        statusEl.textContent = "Something went wrong — please email us directly at enquiries@remattechnologies.io";
+        console.error('Web3Forms error:', err);
+      })
+      .finally(function () {
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = '';
+      });
+  });
+})();
+
+// Self-contained reveal — no dependency on shared.js timing
+(function(){
+  const els = document.querySelectorAll('.ct-reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  els.forEach(el => obs.observe(el));
+  // Fallback: reveal everything after 1s if observer hasn't fired
+  setTimeout(() => els.forEach(el => el.classList.add('in')), 1000);
+})();
+</script>
 </body>
 </html>
