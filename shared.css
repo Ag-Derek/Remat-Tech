@@ -120,9 +120,15 @@
     font-weight:700; font-size:18px; letter-spacing:0.02em;
   }
   .logo .mark{
-    width:30px; height:30px; flex:none;
+    height:26px; width:auto; flex:none; display:block;
   }
-  .logo span{font-family:'Fraunces',serif; font-weight:600;}
+  .logo .logo-text, .footer-brand .logo-text{
+    font-family:'Inter','Manrope',sans-serif; font-weight:500; font-size:16px;
+    letter-spacing:0.01em; color:var(--ink,#111);
+  }
+  .logo .logo-text strong, .footer-brand .logo-text strong{
+    font-weight:800;
+  }
 
   .nav-links{
     display:flex; align-items:center; gap:36px;
@@ -684,9 +690,9 @@
   }
   .footer-brand{
     display:flex; align-items:center; gap:10px;
-    font-family:'Fraunces',serif; font-size:22px; font-weight:600;
   }
-  .footer-brand .mark{width:30px; height:30px;}
+  .footer-brand .mark{height:34px; width:auto;}
+  .footer-brand .logo-text{font-size:20px; color:#fff;}
   .footer-blurb{color:#9fabc9; font-size:14px; margin-top:18px; max-width:280px;}
   .footer-cols{display:flex; gap:64px; flex-wrap:wrap;}
   .footer-col h4{
