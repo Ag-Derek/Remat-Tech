@@ -1478,10 +1478,13 @@
 .currency-field span:nth-child(8){ top:120px; left:78%; font-size:44px;}
 .currency-field span:nth-child(9){ top:200px; left:16%; font-size:40px;}
 
-.handshake-banner{ position:relative; z-index:1; margin-top:50px; border-radius:0; overflow:hidden; }
+.handshake-banner{
+  position:relative; z-index:1; margin-top:50px; border-radius:0; overflow:hidden;
+  width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw);
+}
 .handshake-banner svg{ width:100%; height:auto; display:block; }
 .handshake-banner .handshake-video{
-  width:100%; height:100%; min-height:280px; aspect-ratio:1200/420;
+  width:100%; height:100%; min-height:320px; max-height:560px; aspect-ratio:1200/480;
   object-fit:cover; display:block; background:#3a2a22;
 }
 
