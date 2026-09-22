@@ -397,6 +397,18 @@
     display:flex; align-items:center; justify-content:center;
     position:relative; min-height:420px;
   }
+  .capital-video{
+    width:min(1100px, 100%);
+    aspect-ratio:16/9;
+    height:auto;
+    display:block;
+    object-fit:cover;
+    border-radius:20px;
+    box-shadow:0 40px 90px -24px rgba(6,14,36,.55), 0 0 0 1px rgba(255,255,255,.08);
+  }
+  @media(max-width:640px){
+    .capital-video{ border-radius:12px; }
+  }
   .capital-badge{
     position:absolute;
     background:#fff; border-radius:50px; padding:12px 20px;
