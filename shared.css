@@ -1116,7 +1116,7 @@
 .scroll-cue:hover{background:var(--blue); color:#fff; border-color:var(--blue);}
 
 .port-banner{
-  position:relative; z-index:1; margin-top:50px;
+  position:relative; z-index:1; margin:50px -32px 0; /* cancel .uc-hero side padding so video runs edge to edge */
   border-radius:0; overflow:hidden;
 }
 .port-banner svg{width:100%; height:auto; display:block;}
@@ -1356,6 +1356,7 @@
 .city-banner{
   position:relative; z-index:1; margin-top:50px; border-radius:0; overflow:hidden;
 }
+.city-banner--bleed{margin-left:-32px; margin-right:-32px;}
 .city-banner svg{width:100%; height:auto; display:block;}
 .city-banner .city-video{
   width:100%; height:100%; min-height:280px; aspect-ratio:1200/420;
